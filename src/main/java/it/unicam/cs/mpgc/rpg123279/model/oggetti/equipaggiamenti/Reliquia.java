@@ -7,11 +7,11 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("ARMATURA")
-public class Armatura extends AbstractEquipaggiamento {
+@DiscriminatorValue("RELIQUIA")
+public class Reliquia extends AbstractEquipaggiamento {
 
-    public Armatura() {
-        super("Giacca Rinforzata", "Una giacca pesante rinforzata con cuoio.",
-                30, Rarita.COMUNE, TipoOggetto.ARMATURA, 4);
+    public Reliquia() {
+        super("Amuleto Maledetto", "Un antico amuleto legato al mare.",
+                100, Rarita.EPICO, TipoOggetto.RELIQUIA, 10);
     }
 }
