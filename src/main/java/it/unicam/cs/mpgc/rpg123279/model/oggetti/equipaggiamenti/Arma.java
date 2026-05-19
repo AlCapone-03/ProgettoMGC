@@ -9,8 +9,9 @@ import jakarta.persistence.Entity;
 @Entity
 @DiscriminatorValue("ARMA")
 public class Arma extends AbstractEquipaggiamento {
-    public Arma() {
-        super("Spada Arrugginita", "Una vecchia spada da pirata.",
-                25, Rarita.COMUNE, TipoOggetto.ARMA, 5);
+
+    public Arma() {}
+    public Arma(String nome, String descrizione, int valore, int livelloRichiesto, Rarita rarita, int bonus) {
+        super(nome, descrizione, valore, rarita, TipoOggetto.ARMA,livelloRichiesto, bonus);
     }
 }

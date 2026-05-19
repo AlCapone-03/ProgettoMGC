@@ -31,14 +31,18 @@ public abstract class AbstractOggetto {
     @Column(nullable = false)
     private TipoOggetto tipoOggetto;
 
+    @Column(nullable = false)
+    private int livelloRichiesto;
+
     public AbstractOggetto() {}
 
-    public AbstractOggetto(String nome, String descrizione, int valore, Rarita rarita, TipoOggetto tipoOggetto) {
+    public AbstractOggetto(String nome, String descrizione, int valore, Rarita rarita, TipoOggetto tipoOggetto, int livelloRichiesto) {
         this.nome = nome;
         this.descrizione = descrizione;
         this.valore = valore;
         this.rarita = rarita;
         this.tipoOggetto = tipoOggetto;
+        this.livelloRichiesto = livelloRichiesto;
     }
 
     public Long getId() {
@@ -87,6 +91,6 @@ public abstract class AbstractOggetto {
 
     @Override
     public String toString() {
-        return nome + " [" + rarita + "]" + " - Valore: " + valore;
+        return nome + " [" + rarita + "]" + " Lv." + livelloRichiesto;
     }
 }

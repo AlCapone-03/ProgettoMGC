@@ -8,7 +8,8 @@ import jakarta.persistence.MappedSuperclass;
 public abstract class AbstractConsumabile extends AbstractOggetto implements IUsable {
 
     protected AbstractConsumabile() {}
-    protected AbstractConsumabile(String nome, String descrizione, int valore, Rarita rarita, TipoOggetto tipoOggetto) {
-        super(nome, descrizione, valore, rarita, tipoOggetto);
+    protected AbstractConsumabile(String nome, String descrizione, int valore, Rarita rarita,
+                                  TipoOggetto tipoOggetto, int livelloRichiesto) {
+        super(nome, descrizione, valore, rarita, tipoOggetto, livelloRichiesto);
     }
 }

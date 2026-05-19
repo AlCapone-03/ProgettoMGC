@@ -9,9 +9,9 @@ import jakarta.persistence.Table;
 @Table(name = "kraken_boss")
 public class KrakenBoss extends AbstractMostroMarino {
 
-    public KrakenBoss() {
-        super("Kraken", 300, 45, 20, 10, 250,
-                200, TipoNemico.KRAKEN_BOSS);
+    public KrakenBoss(int livello) {
+        super("Kraken", 300+(livello*20), 120+(livello*3), 80+(livello*2),
+                livello, 250*(livello*3), 200*(livello*3), TipoNemico.KRAKEN_BOSS);
     }
 
     @Override

@@ -8,9 +8,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "pirati_scheletrici")
 public class PirataScheletrico extends AbstractNemico {
-    public PirataScheletrico() {
-        super("Pirata Scheletrico", 70, 16, 8, 2, 35,
-                25, TipoNemico.PIRATA_SCHELETRICO);
+    public PirataScheletrico(int livello) {
+        super("Pirata Scheletrico", 70+(livello*10), 16+(livello*10), 8+(livello*10),
+                livello, 35+(livello*10), 25+(livello*10), TipoNemico.PIRATA_SCHELETRICO);
     }
     @Override
     public void subisciDanno(int damage) {

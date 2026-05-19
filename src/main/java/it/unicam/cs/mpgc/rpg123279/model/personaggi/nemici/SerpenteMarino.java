@@ -8,9 +8,9 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "serpenti_marini")
 public class SerpenteMarino extends AbstractMostroMarino {
-    public SerpenteMarino() {
-        super("Serpente Marino", 120, 25, 12, 4, 60,
-                45, TipoNemico.SERPENTE_MARINO);
+    public SerpenteMarino(int livello) {
+        super("Serpente Marino", 120+(livello*15), 25+(livello*15), 12+(livello*15),
+                livello, 60*livello, 45*livello, TipoNemico.SERPENTE_MARINO);
     }
     @Override
     public void subisciDanno(int damage) {
