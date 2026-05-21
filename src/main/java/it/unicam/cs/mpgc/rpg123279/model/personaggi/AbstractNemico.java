@@ -20,8 +20,7 @@ public abstract class AbstractNemico extends AbstractPersonaggio {
     private TipoNemico tipoNemico;
 
     protected AbstractNemico() {}
-    protected AbstractNemico(String name, int maxHp, int attacco, int difesa, int livello, int xp,
-                             int oro, TipoNemico tp) {
+    protected AbstractNemico(String name, int maxHp, int attacco, int difesa, int livello, int xp, int oro, TipoNemico tp) {
         super(name, maxHp, attacco, difesa, livello);
         this.xpRilasciata = xp;
         this.oroRilasciato = oro;

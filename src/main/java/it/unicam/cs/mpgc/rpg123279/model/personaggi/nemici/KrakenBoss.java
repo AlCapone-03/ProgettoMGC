@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 @Table(name = "kraken_boss")
 public class KrakenBoss extends AbstractMostroMarino {
 
+    protected KrakenBoss() {}
     public KrakenBoss(int livello) {
         super("Kraken", 300+(livello*20), 120+(livello*3), 80+(livello*2),
                 livello, 250*(livello*3), 200*(livello*3), TipoNemico.KRAKEN_BOSS);
@@ -16,46 +17,8 @@ public class KrakenBoss extends AbstractMostroMarino {
 
     @Override
     public void subisciDanno(int damage) {
-
-    }
-
-    @Override
-    public boolean isVivo() {
-        return false;
-    }
-
-    @Override
-    public void recuperaSalute(int amount) {
-
-    }
-
-    @Override
-    public int getAttacco() {
-        return 0;
-    }
-
-    @Override
-    public int getDifesa() {
-        return 0;
-    }
-
-    @Override
-    public int getHp() {
-        return 0;
-    }
-
-    @Override
-    public int getMaxHp() {
-        return 0;
-    }
-
-    @Override
-    public int getLivello() {
-        return 0;
-    }
-
-    @Override
-    public boolean isAlive() {
-        return false;
+        int riduzione = getDifesa() / 2;
+        int dannoEffettivo = Math.max(1, damage - getDifesa());
+        setHp(Math.max(0, getHp() - dannoEffettivo));
     }
 }

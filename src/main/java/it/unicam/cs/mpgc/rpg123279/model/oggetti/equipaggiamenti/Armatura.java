@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 @DiscriminatorValue("ARMATURA")
 public class Armatura extends AbstractEquipaggiamento {
 
+    public Armatura() {}
     public Armatura(String nome, String descrizione, int valore, Rarita rarita, int livelloRichiesto,  int bonus) {
         super(nome, descrizione, valore, rarita, TipoOggetto.ARMATURA, livelloRichiesto,  bonus);
     }

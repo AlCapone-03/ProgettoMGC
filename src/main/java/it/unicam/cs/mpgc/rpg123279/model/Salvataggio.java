@@ -27,4 +27,12 @@ public class Salvataggio {
         this.nomeSlot = nomeSlot;
         this.dataSalvataggio = LocalDateTime.now();
     }
+
+    public Long getId() { return id; }
+    public Giocatore getGiocatore() { return giocatore; }
+    public void setGiocatore(Giocatore giocatore) { this.giocatore = giocatore; }
+    public LocalDateTime getDataSalvataggio() { return dataSalvataggio; }
+    public void setDataSalvataggio(LocalDateTime dataSalvataggio) {this.dataSalvataggio = dataSalvataggio;}
+    public String getNomeSlot() { return nomeSlot; }
+    public void setNomeSlot(String nomeSlot) { this.nomeSlot = nomeSlot; }
 }

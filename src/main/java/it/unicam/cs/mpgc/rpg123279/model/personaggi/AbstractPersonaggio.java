@@ -39,7 +39,40 @@ public abstract class AbstractPersonaggio implements IAttackable, IHealable, IEn
         this.livello = livello;
     }
 
-    public String getNome() {
-        return nome;
+    public Long getId() { return id; }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
+    public void setHp(int hp) { this.hp = Math.max(0, Math.min(maxHp, hp)); }
+    public void setAttacco(int attacco) { this.attacco = attacco; }
+    public void setDifesa(int difesa) { this.difesa = difesa; }
+    public void setLivello(int livello) { this.livello = livello; }
+
+    @Override
+    public int getAttacco() { return attacco; }
+    @Override
+    public int getDifesa() { return difesa; }
+
+    @Override
+    public int getHp() { return hp; }
+
+    @Override
+    public int getMaxHp() { return maxHp; }
+
+    @Override
+    public int getLivello() { return livello; }
+
+    @Override
+    public void subisciDanno(int damage) {
+        //uso Math.max per evitare valori negativi
+        int dannoEffettivo = Math.max(0, damage - getDifesa());
+        this.hp = Math.max(0, this.hp - dannoEffettivo);
+    }
+
+    @Override
+    public boolean isVivo() { return hp > 0; }
+
+    @Override
+    public void recuperaSalute(int cura) {
+        this.hp = Math.min(this.maxHp, this.hp + cura);
     }
 }
