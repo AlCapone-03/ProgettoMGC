@@ -26,4 +26,8 @@ public abstract class AbstractNemico extends AbstractPersonaggio {
         this.oroRilasciato = oro;
         this.tipoNemico = tp;
     }
+
+    public int getXpRilasciata()   { return xpRilasciata; }
+    public int getOroRilasciato()  { return oroRilasciato; }
+    public TipoNemico getTipoNemico() { return tipoNemico; }
 }

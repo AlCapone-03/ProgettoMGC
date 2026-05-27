@@ -6,16 +6,16 @@ import it.unicam.cs.mpgc.rpg123279.model.oggetti.AbstractOggetto;
 public class DatiTurno {
 
     private final AzioneCombattimento azioneGiocatore;
-    private final int dannoDaGiocatore;
-    private final int dannoRiceuvtoGiocatore;
+    private final int dannoInflitto;
+    private final int dannoRicevuto;
     private final AbstractOggetto oggettoUsato;
     private final boolean fugaRiuscita;
     private final String descrizione;
 
     private DatiTurno(Builder builder) {
         this.azioneGiocatore= builder.azioneGiocatore;
-        this.dannoDaGiocatore= builder.dannoDaGiocatore;
-        this.dannoRiceuvtoGiocatore= builder.dannoRicevutoGiocatore;
+        this.dannoInflitto = builder.dannoInflitto;
+        this.dannoRicevuto = builder.dannoRicevuto;
         this.oggettoUsato= builder.oggettoUsato;
         this.fugaRiuscita= builder.fugaRiuscita;
         this.descrizione= builder.descrizione;
@@ -24,8 +24,8 @@ public class DatiTurno {
     public static class Builder {
 
         private final AzioneCombattimento azioneGiocatore;
-        private int dannoDaGiocatore= 0;
-        private int dannoRicevutoGiocatore= 0;
+        private int dannoInflitto = 0;
+        private int dannoRicevuto = 0;
         private AbstractOggetto oggettoUsato= null;
         private boolean fugaRiuscita= false;
         private String descrizione= "";
@@ -35,12 +35,12 @@ public class DatiTurno {
             this.azioneGiocatore = azione;
         }
 
-        public Builder dannoDaGiocatore(int valore) {
-            this.dannoDaGiocatore = valore;
+        public Builder dannoInflitto(int valore) {
+            this.dannoInflitto = valore;
             return this;
         }
         public Builder dannoRicevuto(int valore) {
-            this.dannoRicevutoGiocatore = valore;
+            this.dannoRicevuto = valore;
             return this;
         }
         public Builder oggettoUsato(AbstractOggetto oggetto) {
@@ -59,15 +59,15 @@ public class DatiTurno {
     }
 
     public AzioneCombattimento getAzioneGiocatore(){ return azioneGiocatore; }
-    public int getDannoDaGiocatore(){ return dannoDaGiocatore; }
-    public int getDannoRicevutoGiocatore(){ return dannoRiceuvtoGiocatore; }
+    public int getDannoInflitto(){ return dannoInflitto; }
+    public int getDannoRicevuto(){ return dannoRicevuto; }
     public AbstractOggetto getOggettoUsato(){ return oggettoUsato; }
     public String getDescrizione() {return descrizione; }
     public boolean isFugaRiuscita(){ return fugaRiuscita; }
 
     @Override
     public String toString() {
-        return "DatiTurno{azione=" + azioneGiocatore + ", dannoInflitto=" + dannoDaGiocatore +
-                ", dannoRicevuto=" + dannoRiceuvtoGiocatore + ", fuga=" + fugaRiuscita + "}";
+        return "DatiTurno{azione=" + azioneGiocatore + ", dannoInflitto=" + dannoInflitto +
+                ", dannoRicevuto=" + dannoRicevuto + ", fuga=" + fugaRiuscita + "}";
     }
 }

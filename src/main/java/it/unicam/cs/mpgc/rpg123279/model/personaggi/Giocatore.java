@@ -5,7 +5,6 @@ import it.unicam.cs.mpgc.rpg123279.model.oggetti.AbstractEquipaggiamento;
 import it.unicam.cs.mpgc.rpg123279.model.oggetti.AbstractOggetto;
 import it.unicam.cs.mpgc.rpg123279.model.oggetti.equipaggiamenti.Arma;
 import it.unicam.cs.mpgc.rpg123279.model.oggetti.equipaggiamenti.Armatura;
-import it.unicam.cs.mpgc.rpg123279.model.oggetti.equipaggiamenti.Reliquia;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,21 +41,13 @@ public class Giocatore extends AbstractPersonaggio {
         this.oro = 0;
     }
 
-    public void aggiungiEsperienza(int xp) {
-        this.esperienza += xp;
-    }
+    public void aggiungiEsperienza(int xp) {this.esperienza += xp;}
 
-    public void aggiungiOro(int oro) {
-        this.oro += oro;
-    }
+    public void aggiungiOro(int oro) {this.oro += oro;}
 
-    public void aggiungiAInventario(AbstractOggetto oggetto) {
-        inventario.add(oggetto);
-    }
+    public void aggiungiAInventario(AbstractOggetto oggetto) {inventario.add(oggetto);}
 
-    public boolean rimuoviDaInventario(AbstractOggetto oggetto) {
-        return inventario.remove(oggetto);
-    }
+    public boolean rimuoviDaInventario(AbstractOggetto oggetto) {return inventario.remove(oggetto);}
 
     public void equipaggia(AbstractEquipaggiamento equipaggiamento) {
         equipaggiamenti.removeIf(e -> e.getClass().equals(equipaggiamento.getClass()));
@@ -77,14 +68,26 @@ public class Giocatore extends AbstractPersonaggio {
     public void setInventario(List<AbstractOggetto> inventario) {this.inventario = inventario;}
     public List<AbstractEquipaggiamento> getEquipaggiamenti() {return equipaggiamenti;}
     public Arma getArmaEquipaggiata() {
-        return equipaggiamenti.stream()
-                .filter(e -> e instanceof Arma)
+        return equipaggiamenti.stream().filter(e -> e instanceof Arma)
                 .map(e -> (Arma) e).findFirst().orElse(null);
     }
     public Armatura getArmaturaEquipaggiata() {
-        return equipaggiamenti.stream()
-                .filter(e -> e instanceof Armatura)
+        return equipaggiamenti.stream().filter(e -> e instanceof Armatura)
                 .map(e -> (Armatura) e).findFirst().orElse(null);
+    }
+
+    @Override
+    public int getAttacco() {
+        Arma armaEquipaggiata = getArmaEquipaggiata();
+        int bonusArma = armaEquipaggiata != null ? armaEquipaggiata.getBonusStatistica() : 0;
+        return super.getAttacco() + bonusArma;
+    }
+
+    @Override
+    public int getDifesa() {
+        Armatura armaturaEquipaggiata = getArmaturaEquipaggiata();
+        int bonusArmatura = armaturaEquipaggiata != null ? armaturaEquipaggiata.getBonusStatistica() : 0;
+        return super.getDifesa() + bonusArmatura;
     }
 
     @Override
@@ -92,19 +95,5 @@ public class Giocatore extends AbstractPersonaggio {
         return "Giocatore{" + "nome='" + getNome() + '\'' + ", livello=" + getLivello() + ", hp=" + getHp() +
                 "/" + getMaxHp() + ", attacco=" + getAttacco() + ", difesa=" + getDifesa() + ", " +
                 "esperienza=" + esperienza + ", oro=" + oro + ", classe=" + classePersonaggio + '}';
-    }
-
-    @Override
-    public int getAttacco() {
-        int bonusArmi = inventario.stream().filter(o -> o instanceof Arma)
-                .mapToInt(o -> ((Arma) o).getBonusStatistica()).sum();
-        return super.getAttacco() + bonusArmi;
-    }
-
-    @Override
-    public int getDifesa() {
-        int bonusDifesa = inventario.stream().filter(o -> o instanceof Armatura || o instanceof Reliquia)
-                .mapToInt(o -> ((AbstractEquipaggiamento) o).getBonusStatistica()).sum();
-        return super.getDifesa() + bonusDifesa;
     }
 }

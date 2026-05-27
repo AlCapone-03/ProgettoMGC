@@ -7,15 +7,13 @@ import it.unicam.cs.mpgc.rpg123279.model.eventi.*;
 import it.unicam.cs.mpgc.rpg123279.model.mappe.Rotta;
 import it.unicam.cs.mpgc.rpg123279.model.oggetti.AbstractOggetto;
 import it.unicam.cs.mpgc.rpg123279.model.personaggi.AbstractNemico;
+import it.unicam.cs.mpgc.rpg123279.Costanti;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
 
 public class ServiceEvento implements IServiceEvento {
 
-    private static final int pericoloAlto = 8;
-    private static final int pericoloMedio = 4;
-    private static final int nOggettiCatalogo = 4;
     private final IFactoryNemico factoryNemico;
     private final IFactoryOggetto factoryOggetto;
     private final Random random;
@@ -41,12 +39,12 @@ public class ServiceEvento implements IServiceEvento {
 
     private TipoEvento calcolaTipoEvento(int pericolo) {
         double n = random.nextDouble();
-        if (pericolo >= pericoloAlto) {
+        if (pericolo >= Costanti.PERICOLO_ALTO) {
             if (n < 0.85) return TipoEvento.BATTAGLIA;
             if (n < 0.95) return TipoEvento.TESORO;
             return TipoEvento.MERCANTE;
         }
-        if (pericolo >= pericoloMedio) {
+        if (pericolo >= Costanti.PERICOLO_MEDIO) {
             if (n < 0.55) return TipoEvento.BATTAGLIA;
             if (n < 0.80) return TipoEvento.TESORO;
             return TipoEvento.MERCANTE;
@@ -62,7 +60,7 @@ public class ServiceEvento implements IServiceEvento {
     }
 
     private EventoTesoro creaEventoTesoro(int livelloGiocatore) {
-        AbstractOggetto oggetto = random.nextDouble() < 0.6 ?
+        AbstractOggetto oggetto = random.nextDouble() < Costanti.PROBABILITA_ITEM_IN_TESORO ?
                 factoryOggetto.creaOggettoCasuale(livelloGiocatore) : null;
         int oro = (20 + random.nextInt(60)) + (livelloGiocatore * 10);
         return new EventoTesoro(oggetto, oro);
@@ -70,7 +68,7 @@ public class ServiceEvento implements IServiceEvento {
 
     private EventoMercante creaEventoMercante(int livelloGiocatore) {
         Map<AbstractOggetto, Integer> catalogo = new LinkedHashMap<>();
-        for (int i = 0; i < nOggettiCatalogo; i++) {
+        for (int i = 0; i < Costanti.N_OGGETTI_CATALOGO; i++) {
             AbstractOggetto oggetto = factoryOggetto.creaOggettoCasuale(livelloGiocatore);
             catalogo.put(oggetto, oggetto.getValore());
         }

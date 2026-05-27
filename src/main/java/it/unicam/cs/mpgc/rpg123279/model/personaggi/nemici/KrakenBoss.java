@@ -15,10 +15,4 @@ public class KrakenBoss extends AbstractMostroMarino {
                 livello, 250*(livello*3), 200*(livello*3), TipoNemico.KRAKEN_BOSS);
     }
 
-    @Override
-    public void subisciDanno(int damage) {
-        int riduzione = getDifesa() / 2;
-        int dannoEffettivo = Math.max(1, damage - getDifesa());
-        setHp(Math.max(0, getHp() - dannoEffettivo));
-    }
 }
