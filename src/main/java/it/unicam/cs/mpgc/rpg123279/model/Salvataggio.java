@@ -12,7 +12,8 @@ public class Salvataggio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "giocatore_id", nullable = false)
     private Giocatore giocatore;
 
     @Column(nullable = false)
@@ -21,11 +22,15 @@ public class Salvataggio {
     @Column(nullable = false)
     private String nomeSlot;
 
+    @Column(nullable = false)
+    private String nomeIsolaCorrente;
+
     public Salvataggio() {}
-    public Salvataggio(Giocatore giocatore, String nomeSlot) {
-        this.giocatore = giocatore;
-        this.nomeSlot = nomeSlot;
-        this.dataSalvataggio = LocalDateTime.now();
+    public Salvataggio(Giocatore giocatore, String nomeSlot, String nomeIsolaCorrente) {
+        this.giocatore= giocatore;
+        this.nomeSlot= nomeSlot;
+        this.nomeIsolaCorrente= nomeIsolaCorrente;
+        this.dataSalvataggio= LocalDateTime.now();
     }
 
     public Long getId() { return id; }
@@ -35,4 +40,9 @@ public class Salvataggio {
     public void setDataSalvataggio(LocalDateTime dataSalvataggio) {this.dataSalvataggio = dataSalvataggio;}
     public String getNomeSlot() { return nomeSlot; }
     public void setNomeSlot(String nomeSlot) { this.nomeSlot = nomeSlot; }
+    public String getNomeIsolaCorrente() { return nomeIsolaCorrente; }
+    public void setNomeIsolaCorrente(String nome) { this.nomeIsolaCorrente = nome; }
+
+    @Override
+    public String toString() {return "Salvataggio:'" + nomeSlot + "', data=" + dataSalvataggio + "}";}
 }

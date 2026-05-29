@@ -3,18 +3,17 @@ package it.unicam.cs.mpgc.rpg123279.repository;
 import it.unicam.cs.mpgc.rpg123279.config.HibernateConfig;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import java.lang.reflect.ParameterizedType;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class AbstractRepoHibernate<T, ID> implements IRepository<T, ID> {
+public class BaseRepoHibernate<T, ID extends Serializable> implements IRepository<T, ID> {
 
     private final Class<T> entita;
 
-    @SuppressWarnings("unchecked")
-    protected AbstractRepoHibernate() {
-        this.entita = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    public BaseRepoHibernate(Class<T> entita) {
+        if (entita == null) throw new IllegalArgumentException("La classe entità non può essere null.");
+        this.entita = entita;
     }
 
     @Override
@@ -41,7 +40,7 @@ public abstract class AbstractRepoHibernate<T, ID> implements IRepository<T, ID>
             return merged;
         } catch (Exception e) {
             if (t != null) t.rollback();
-            throw new RuntimeException(e);
+            throw new RuntimeException("Errore durante l'aggiornamento: " + e.getMessage(), e);
         }
     }
 
@@ -54,14 +53,14 @@ public abstract class AbstractRepoHibernate<T, ID> implements IRepository<T, ID>
             t.commit();
         } catch (Exception e) {
             if (t != null) t.rollback();
-            throw new RuntimeException(e);
+            throw new RuntimeException("Errore durante l'eliminazione: " + e.getMessage(), e);
         }
     }
 
     @Override
     public Optional<T> findById(ID id) {
         try (Session s = HibernateConfig.getSessionFactory().openSession()) {
-            return Optional.ofNullable(s.get(entita, (Long) id));
+            return Optional.ofNullable(s.get(entita, id));
         }
     }
 
