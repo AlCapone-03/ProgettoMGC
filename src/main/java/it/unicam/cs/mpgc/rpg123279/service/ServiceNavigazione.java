@@ -35,7 +35,7 @@ public class ServiceNavigazione implements IServiceNavigazione {
     public AbstractGameEvent naviga(Rotta rotta, Giocatore giocatore) {
         controllaRotta(rotta);
         isolaCorrente = rotta.getDestinazione();
-        AbstractGameEvent evento = serviceEvento.generaEvento(rotta, giocatore.getLivello());
+        AbstractGameEvent evento = serviceEvento.generaEventoNavigazione(rotta, giocatore.getLivello(), isolaCorrente);
         logNavigazione(rotta, evento);
         return evento;
     }
@@ -46,6 +46,12 @@ public class ServiceNavigazione implements IServiceNavigazione {
                 rotta + ") non parte dall'isola corrente: " + isolaCorrente.getNome());
         if (!mappa.getRotteDaIsola(isolaCorrente).contains(rotta))
             throw new AzioneIrregolareException("La rotta selezionata non è raggiungibile dall'isola corrente.");
+    }
+
+    @Override
+    public AbstractGameEvent esplora(Giocatore giocatore) {
+        int pericolo = 3 + isolaCorrente.getOrdineSequenza() * 3;
+        return serviceEvento.generaEventoEsplorazione(pericolo, giocatore.getLivello(), isolaCorrente);
     }
 
     private void logNavigazione(Rotta rotta, AbstractGameEvent evento) {

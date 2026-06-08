@@ -13,6 +13,7 @@ public class BattleState {
     private int numeroTurno;
     private boolean battagliaAttiva;
     private final List<String> logBattaglia;
+    private int danniSubiti;
 
     public BattleState(Giocatore giocatore, AbstractNemico nemico) {
         if (giocatore == null) throw new IllegalArgumentException("Il giocatore non può essere null.");
@@ -22,16 +23,13 @@ public class BattleState {
         this.numeroTurno= 1;
         this.battagliaAttiva= true;
         this.logBattaglia= new ArrayList<>();
+        this.danniSubiti= 0;
         aggiungiLog("La battaglia ha inizio: " + giocatore.getNome() + " vs " + nemico.getNome());
     }
 
-    public void avanzaTurno() {
-        numeroTurno++;
-    }
+    public void avanzaTurno() {numeroTurno++;}
 
-    public void terminaBattaglia() {
-        this.battagliaAttiva = false;
-    }
+    public void terminaBattaglia() {this.battagliaAttiva = false;}
 
     public void aggiungiLog(String messaggio) {logBattaglia.add(messaggio);}
     public void aggiungiLogTurno(String messaggio) {logBattaglia.add("[Turno " + numeroTurno + "] " + messaggio);}
@@ -41,4 +39,6 @@ public class BattleState {
     public int getNumeroTurno(){ return numeroTurno; }
     public boolean isBattagliaFinita(){ return !battagliaAttiva; }
     public List<String> getLogBattaglia(){ return Collections.unmodifiableList(logBattaglia); }
+    public int getDanniSubiti(){ return danniSubiti; }
+    public void aggiungiDanniSubiti(int danni) { this.danniSubiti += danni; }
 }

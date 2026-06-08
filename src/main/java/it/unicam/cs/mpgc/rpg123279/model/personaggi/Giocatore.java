@@ -24,22 +24,25 @@ public class Giocatore extends AbstractPersonaggio {
     private ClassePersonaggio classePersonaggio;
 
     @SuppressWarnings("JpaAttributeTypeInspection")
-    @OneToMany(targetEntity = AbstractOggetto.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = AbstractOggetto.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "giocatore_id")
     private List<AbstractOggetto> inventario = new ArrayList<>();
 
     @SuppressWarnings("JpaAttributeTypeInspection")
-    @OneToMany(targetEntity = AbstractEquipaggiamento.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = AbstractEquipaggiamento.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "giocatore_equipaggiamento_id")
     private List<AbstractEquipaggiamento> equipaggiamenti = new ArrayList<>();
 
     public Giocatore() {}
-    public Giocatore(String nome, int maxHp, int attacco, int difesa, int livello, ClassePersonaggio cp) {
-        super(nome, maxHp, attacco, difesa, livello);
+    public Giocatore(String nome, ClassePersonaggio cp) {
+        super(nome, cp.getMaxHpBase(), cp.getAttaccoBase(), cp.getDifesaBase(), 1);
         this.classePersonaggio = cp;
         this.esperienza = 0;
         this.oro = 0;
     }
+
+    public int getAttaccoLivello() { return super.getAttacco(); }
+    public int getDifesaLivello() { return super.getDifesa(); }
 
     public void aggiungiEsperienza(int xp) {this.esperienza += xp;}
 
@@ -47,25 +50,24 @@ public class Giocatore extends AbstractPersonaggio {
 
     public void aggiungiAInventario(AbstractOggetto oggetto) {inventario.add(oggetto);}
 
-    public boolean rimuoviDaInventario(AbstractOggetto oggetto) {return inventario.remove(oggetto);}
+    public boolean rimuoviDaInventario(AbstractOggetto oggetto) {
+        boolean rimosso = inventario.remove(oggetto);
+        if (rimosso && oggetto instanceof AbstractEquipaggiamento) {
+            equipaggiamenti.remove((AbstractEquipaggiamento) oggetto);
+        }
+        return rimosso;
+    }
 
     public void equipaggia(AbstractEquipaggiamento equipaggiamento) {
         equipaggiamenti.removeIf(e -> e.getClass().equals(equipaggiamento.getClass()));
         equipaggiamenti.add(equipaggiamento);
     }
 
-    public boolean rimuoviEquipaggiamento(AbstractEquipaggiamento equipaggiamento) {
-        return equipaggiamenti.removeIf(e -> e.getClass().equals(equipaggiamento.getClass()));
-    }
-
     public int getEsperienza() {return esperienza;}
-    public void setEsperienza(int esperienza) {this.esperienza = esperienza;}
     public int getOro() {return oro;}
     public void setOro(int oro) {this.oro = oro;}
     public ClassePersonaggio getClassePersonaggio() {return classePersonaggio;}
-    public void setClassePersonaggio(ClassePersonaggio cp) {this.classePersonaggio = cp;}
     public List<AbstractOggetto> getInventario() {return inventario;}
-    public void setInventario(List<AbstractOggetto> inventario) {this.inventario = inventario;}
     public List<AbstractEquipaggiamento> getEquipaggiamenti() {return equipaggiamenti;}
     public Arma getArmaEquipaggiata() {
         return equipaggiamenti.stream().filter(e -> e instanceof Arma)

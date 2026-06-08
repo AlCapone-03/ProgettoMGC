@@ -11,8 +11,8 @@ public class KrakenBoss extends AbstractMostroMarino {
 
     protected KrakenBoss() {}
     public KrakenBoss(int livello) {
-        super("Kraken", 300+(livello*20), 120+(livello*3), 80+(livello*2),
-                livello, 250*(livello*3), 200*(livello*3), TipoNemico.KRAKEN_BOSS);
+        super("Kraken", 150+(livello*12), 25+(livello*3), 6+(livello*4),
+                livello, 100+(livello*15), 60+(livello*10), TipoNemico.KRAKEN_BOSS);
     }
 
 }

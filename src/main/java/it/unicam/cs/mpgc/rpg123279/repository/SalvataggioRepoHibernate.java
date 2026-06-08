@@ -1,7 +1,7 @@
 package it.unicam.cs.mpgc.rpg123279.repository;
 
 import it.unicam.cs.mpgc.rpg123279.model.Salvataggio;
-import it.unicam.cs.mpgc.rpg123279.config.HibernateConfig;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import java.util.List;
 import java.util.Optional;
@@ -15,16 +15,30 @@ public class SalvataggioRepoHibernate extends BaseRepoHibernate<Salvataggio, Lon
     @Override
     public Optional<Salvataggio> findByNomeSlot(String nomeSlot) {
         try (Session s = HibernateConfig.getSessionFactory().openSession()) {
-            return s.createQuery("FROM Salvataggio s WHERE lower(s.nomeSlot) = lower(:nomeSlot)",
+            Optional<Salvataggio> risultato = s.createQuery("FROM Salvataggio s WHERE lower(s.nomeSlot) = lower(:nomeSlot)",
                             Salvataggio.class).setParameter("nomeSlot", nomeSlot).uniqueResultOptional();
+            risultato.ifPresent(salvataggio -> {
+                if (salvataggio.getGiocatore() != null) {
+                    Hibernate.initialize(salvataggio.getGiocatore().getInventario());
+                    Hibernate.initialize(salvataggio.getGiocatore().getEquipaggiamenti());
+                }
+            });
+            return risultato;
         }
     }
 
     @Override
     public List<Salvataggio> findAllSlotOrderByDate() {
         try (Session s = HibernateConfig.getSessionFactory().openSession()) {
-            return s.createQuery("FROM Salvataggio s ORDER BY s.dataSalvataggio DESC",
+            List<Salvataggio> risultati = s.createQuery("FROM Salvataggio s ORDER BY s.dataSalvataggio DESC",
                     Salvataggio.class).getResultList();
+            risultati.forEach(salvataggio -> {
+                if (salvataggio.getGiocatore() != null) {
+                    Hibernate.initialize(salvataggio.getGiocatore().getInventario());
+                    Hibernate.initialize(salvataggio.getGiocatore().getEquipaggiamenti());
+                }
+            });
+            return risultati;
         }
     }
 }

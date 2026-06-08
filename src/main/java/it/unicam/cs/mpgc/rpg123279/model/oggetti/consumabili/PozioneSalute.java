@@ -12,8 +12,8 @@ import jakarta.persistence.Entity;
 @DiscriminatorValue("POZIONE")
 public class PozioneSalute extends AbstractConsumabile {
 
-    @Column(nullable = false)
-    private  int cura;
+    @Column
+    private int cura;
 
     public PozioneSalute() {}
     public PozioneSalute(String nome, String descrizione, int valore, Rarita rarita, int livelloRichiesto, int cura) {

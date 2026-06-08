@@ -12,7 +12,7 @@ import jakarta.persistence.Entity;
 @DiscriminatorValue("RUM")
 public class Rum extends AbstractConsumabile {
 
-    @Column(nullable = false)
+    @Column
     private int cura;
 
     public Rum() {}

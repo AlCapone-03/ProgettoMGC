@@ -25,11 +25,15 @@ public class Salvataggio {
     @Column(nullable = false)
     private String nomeIsolaCorrente;
 
+    @Column(nullable = false, length = 500)
+    private String isoleBossSconfitto;
+
     public Salvataggio() {}
-    public Salvataggio(Giocatore giocatore, String nomeSlot, String nomeIsolaCorrente) {
+    public Salvataggio(Giocatore giocatore, String nomeSlot, String nomeIsolaCorrente, String isoleBossSconfitto) {
         this.giocatore= giocatore;
         this.nomeSlot= nomeSlot;
         this.nomeIsolaCorrente= nomeIsolaCorrente;
+        this.isoleBossSconfitto = isoleBossSconfitto;
         this.dataSalvataggio= LocalDateTime.now();
     }
 
@@ -39,9 +43,10 @@ public class Salvataggio {
     public LocalDateTime getDataSalvataggio() { return dataSalvataggio; }
     public void setDataSalvataggio(LocalDateTime dataSalvataggio) {this.dataSalvataggio = dataSalvataggio;}
     public String getNomeSlot() { return nomeSlot; }
-    public void setNomeSlot(String nomeSlot) { this.nomeSlot = nomeSlot; }
     public String getNomeIsolaCorrente() { return nomeIsolaCorrente; }
     public void setNomeIsolaCorrente(String nome) { this.nomeIsolaCorrente = nome; }
+    public String getIsoleBossSconfitto() {return isoleBossSconfitto;}
+    public void setIsoleBossSconfitto(String isoleBossSconfitto) {this.isoleBossSconfitto = isoleBossSconfitto;}
 
     @Override
     public String toString() {return "Salvataggio:'" + nomeSlot + "', data=" + dataSalvataggio + "}";}

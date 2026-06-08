@@ -5,7 +5,7 @@ public final class Costanti {
     private Costanti() {}
 
     public static final int MAX_LIVELLO = 30;
-    public static final int XP_LIVELLO_BASE = 100;
+    public static final int XP_LIVELLO_BASE = 20;
     public static final int HP_PER_LIVELLO = 20;
     public static final int ATTACCO_PER_LIVELLO = 5;
     public static final int DIFESA_PER_LIVELLO = 3;

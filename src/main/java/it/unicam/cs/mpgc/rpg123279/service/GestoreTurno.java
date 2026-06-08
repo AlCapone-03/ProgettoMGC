@@ -20,17 +20,15 @@ public class GestoreTurno {
 
     public DatiTurno eseguiTurno(BattleState stato, AzioneCombattimento azione, AbstractOggetto oggettoScelto) {
         return switch (azione) {
-            case ATTACCA -> gestisciAttacco(stato);
+            case ATTACCA -> gestisciAttaccoGiocatore(stato);
             case USA_OGGETTO -> gestisciUsaOggetto(stato, oggettoScelto);
             case SCAPPA -> gestisciFuga(stato);
         };
     }
 
-    private DatiTurno gestisciAttacco(BattleState stato) {
-        return gestisciAttaccoGiocatore(stato.getGiocatore(), stato.getNemico());
-    }
-
-    private DatiTurno gestisciAttaccoGiocatore(Giocatore giocatore, AbstractNemico nemico) {
+    private DatiTurno gestisciAttaccoGiocatore(BattleState stato) {
+        Giocatore giocatore = stato.getGiocatore();
+        AbstractNemico nemico = stato.getNemico();
         StringBuilder desc = new StringBuilder();
         int dannoAlNemico = calcolaDanno(giocatore.getAttacco(), nemico.getDifesa());
         nemico.setHp(nemico.getHp() - dannoAlNemico);
@@ -39,6 +37,7 @@ public class GestoreTurno {
         int dannoAlGiocatore = 0;
         if (nemico.isVivo()) {
             dannoAlGiocatore = attaccoNemico(giocatore, nemico, desc, "contrattacca");
+            stato.aggiungiDanniSubiti(dannoAlGiocatore);
         } else {
             desc.append(" ").append(nemico.getNome()).append(" è stato sconfitto!");
         }
@@ -49,8 +48,8 @@ public class GestoreTurno {
     private int attaccoNemico(Giocatore giocatore, AbstractNemico nemico, StringBuilder desc, String azione) {
         int dannoAlGiocatore = calcolaDanno(nemico.getAttacco(), giocatore.getDifesa());
         giocatore.setHp(giocatore.getHp() - dannoAlGiocatore);
-        desc.append(" ").append(nemico.getNome())
-                .append(" ").append(azione).append(" per ").append(dannoAlGiocatore).append(" danni.");
+        desc.append(" ").append(nemico.getNome()).append(" ").append(azione).append(" per ")
+                .append(dannoAlGiocatore).append(" danni.");
         return dannoAlGiocatore;
     }
 

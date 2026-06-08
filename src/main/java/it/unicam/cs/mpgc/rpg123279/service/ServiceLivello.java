@@ -28,8 +28,8 @@ public class ServiceLivello implements IServiceLivello {
 
     private void applicaLevelUp(Giocatore giocatore) {
         giocatore.setLivello(giocatore.getLivello() + 1);
-        giocatore.setAttacco(giocatore.getAttacco() + Costanti.ATTACCO_PER_LIVELLO);
-        giocatore.setDifesa(giocatore.getDifesa() + Costanti.DIFESA_PER_LIVELLO);
+        giocatore.setAttacco(giocatore.getAttaccoLivello() + Costanti.ATTACCO_PER_LIVELLO);
+        giocatore.setDifesa(giocatore.getDifesaLivello() + Costanti.DIFESA_PER_LIVELLO);
         giocatore.setMaxHp(giocatore.getMaxHp() + Costanti.HP_PER_LIVELLO);
         System.out.println(giocatore.getNome() + " è ora al livello " + giocatore.getLivello());
     }

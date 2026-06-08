@@ -11,4 +11,5 @@ public interface IServiceNavigazione {
     void setIsolaCorrente(Isola isola);
     List<Rotta> getRotteDisponibili();
     AbstractGameEvent naviga(Rotta rotta, Giocatore giocatore);
+    AbstractGameEvent esplora(Giocatore giocatore);
 }

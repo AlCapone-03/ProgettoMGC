@@ -3,13 +3,14 @@ package it.unicam.cs.mpgc.rpg123279.model.oggetti;
 import it.unicam.cs.mpgc.rpg123279.model.enumerazioni.Rarita;
 import it.unicam.cs.mpgc.rpg123279.model.enumerazioni.TipoOggetto;
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.MappedSuperclass;
 
 @Entity
+@DiscriminatorValue("EQUIPAGGIAMENTO")
 public abstract class AbstractEquipaggiamento extends AbstractOggetto {
 
-    @Column(nullable = false)
+    @Column
     private int bonusStatistica;
 
     protected AbstractEquipaggiamento() {}
@@ -20,5 +21,4 @@ public abstract class AbstractEquipaggiamento extends AbstractOggetto {
     }
 
     public int getBonusStatistica() {return bonusStatistica;}
-    public void setBonusStatistica(int bonusStatistica) {this.bonusStatistica = bonusStatistica;}
 }

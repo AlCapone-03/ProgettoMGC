@@ -1,8 +1,6 @@
 package it.unicam.cs.mpgc.rpg123279.model.battaglia;
 
 import it.unicam.cs.mpgc.rpg123279.model.oggetti.AbstractOggetto;
-import java.util.Collections;
-import java.util.List;
 
 public class RisultatoBattaglia {
 
@@ -13,43 +11,47 @@ public class RisultatoBattaglia {
     }
 
     private final EsitoBattaglia esito;
-    private final int esperienzaGuadagnata;
+    private final int xpGuadagnati;
     private final int oroGuadagnato;
     private final AbstractOggetto oggettoDroppato;
-    private final List<String> logBattaglia;
+    private final int hpRecuperati;
 
-    private RisultatoBattaglia(EsitoBattaglia esito, int xp, int oro, AbstractOggetto drop, List<String> log) {
+    private RisultatoBattaglia(EsitoBattaglia esito, int xp, int oro, AbstractOggetto drop, int hpRecuperati) {
         this.esito= esito;
-        this.esperienzaGuadagnata= xp;
+        this.xpGuadagnati = xp;
         this.oroGuadagnato= oro;
         this.oggettoDroppato = drop;
-        this.logBattaglia= Collections.unmodifiableList(log);
+        this.hpRecuperati= hpRecuperati;
     }
 
-    public static RisultatoBattaglia vittoria(int xp, int oro, AbstractOggetto drop, List<String> log) {
-        return new RisultatoBattaglia(EsitoBattaglia.VITTORIA, xp, oro, drop, log);
+    public static RisultatoBattaglia vittoria(int xp, int oro, AbstractOggetto drop, int hpRecuperati) {
+        return new RisultatoBattaglia(EsitoBattaglia.VITTORIA, xp, oro, drop, hpRecuperati);
     }
-    public static RisultatoBattaglia sconfitta(List<String> log) {
-        return new RisultatoBattaglia(EsitoBattaglia.SCONFITTA, 0, 0, null, log);
+    public static RisultatoBattaglia sconfitta() {
+        return new RisultatoBattaglia(EsitoBattaglia.SCONFITTA, 0, 0, null, 0);
     }
-    public static RisultatoBattaglia fuga(List<String> log) {
-        return new RisultatoBattaglia(EsitoBattaglia.FUGA, 0, 0, null, log);
+    public static RisultatoBattaglia fuga() {
+        return new RisultatoBattaglia(EsitoBattaglia.FUGA, 0, 0, null, 0);
     }
 
-    public boolean isVittoria(){ return esito == EsitoBattaglia.VITTORIA;  }
+    public boolean isVittoria(){ return esito == EsitoBattaglia.VITTORIA; }
     public boolean isSconfitta(){ return esito == EsitoBattaglia.SCONFITTA; }
-    public boolean isFuga(){ return esito == EsitoBattaglia.FUGA;      }
+    public boolean isFuga(){ return esito == EsitoBattaglia.FUGA;}
     public boolean haOggettoDroppato(){ return oggettoDroppato != null; }
 
     public EsitoBattaglia getEsito(){ return esito; }
-    public int getEsperienzaGuadagnata(){ return esperienzaGuadagnata; }
+    public int getXpGuadagnati(){ return xpGuadagnati; }
     public int getOroGuadagnato(){ return oroGuadagnato; }
     public AbstractOggetto getOggettoDroppato(){ return oggettoDroppato; }
-    public List<String> getLogBattaglia(){ return logBattaglia; }
+    public int getHpRecuperati(){ return hpRecuperati; }
 
     @Override
     public String toString() {
-        return "BattleResult{esito=" + esito + ", xp=" + esperienzaGuadagnata + ", oro=" + oroGuadagnato +
-                ", drop=" + (oggettoDroppato != null ? oggettoDroppato.getNome() : "nessuno") + "}";
+        String esitoDes = switch(esito) {
+            case VITTORIA -> "VITTORIA (XP: " + xpGuadagnati + ", Oro: " + oroGuadagnato + "HP: " + hpRecuperati + ")";
+            case SCONFITTA -> "SCONFITTA";
+            case FUGA -> "FUGA";
+        };
+        return "RisultatoBattaglia{" + esitoDes + "}";
     }
 }

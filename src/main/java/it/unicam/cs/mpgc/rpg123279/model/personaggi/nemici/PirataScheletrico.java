@@ -11,7 +11,7 @@ public class PirataScheletrico extends AbstractNemico {
 
     protected PirataScheletrico() {}
     public PirataScheletrico(int livello) {
-        super("Pirata Scheletrico", 70+(livello*10), 16+(livello*10), 8+(livello*10),
+        super("Pirata Scheletrico", 70+(livello*10), 15+(livello*10), 5+(livello*10),
                 livello, 35+(livello*10), 25+(livello*10), TipoNemico.PIRATA_SCHELETRICO);
     }
 

@@ -16,7 +16,7 @@ public class FactoryOggetto implements IFactoryOggetto {
     @Override
     public AbstractOggetto creaArma(int livelloGiocatore) {
         Rarita rarita = generaRarita(livelloGiocatore);
-        int bonus = calcolaBonus(5, rarita, livelloGiocatore);
+        int bonus = calcolaBonus(3, rarita);
         return new Arma(getNomeArma(rarita), "Sciabola da pirata",
                 100 * rarita.getMoltiplicatore(), livelloGiocatore, rarita, bonus);
     }
@@ -24,7 +24,7 @@ public class FactoryOggetto implements IFactoryOggetto {
     @Override
     public AbstractOggetto creaArmatura(int livelloGiocatore) {
         Rarita rarita = generaRarita(livelloGiocatore);
-        int bonus = calcolaBonus(4, rarita, livelloGiocatore);
+        int bonus = calcolaBonus(2, rarita);
         return new Armatura(getNomeArmatura(rarita), "Armatura consumata dal mare",
                 120 * rarita.getMoltiplicatore(), rarita, livelloGiocatore,  bonus);
     }
@@ -32,7 +32,7 @@ public class FactoryOggetto implements IFactoryOggetto {
     @Override
     public AbstractOggetto creaReliquia(int livelloGiocatore) {
         Rarita rarita = generaRarita(livelloGiocatore + 10);
-        int bonus = calcolaBonus(8, rarita, livelloGiocatore);
+        int bonus = calcolaBonus(5, rarita);
         return new Reliquia(getNomeReliquia(rarita), "Antica reliquia maledetta",
                 250 * rarita.getMoltiplicatore(), livelloGiocatore, rarita, bonus, getEffettoReliquia());
     }
@@ -40,7 +40,7 @@ public class FactoryOggetto implements IFactoryOggetto {
     @Override
     public AbstractOggetto creaPozioneSalute(int livelloGiocatore) {
         Rarita rarita = generaRarita(livelloGiocatore);
-        int cura = calcolaBonus(20, rarita, livelloGiocatore);
+        int cura = calcolaBonus(20, rarita);
         return new PozioneSalute("Pozione di Cura", "Recupera salute",
                 50 * rarita.getMoltiplicatore(), rarita, livelloGiocatore,  cura);
     }
@@ -48,7 +48,7 @@ public class FactoryOggetto implements IFactoryOggetto {
     @Override
     public AbstractOggetto creaRum(int livelloGiocatore) {
         Rarita rarita = generaRarita(livelloGiocatore);
-        int cura = calcolaBonus(15, rarita, livelloGiocatore);
+        int cura = calcolaBonus(15, rarita);
         return new Rum("Rum del Corsaro", "Rum forte e speziato",
                 40 * rarita.getMoltiplicatore(), rarita, livelloGiocatore, cura);
     }
@@ -66,8 +66,8 @@ public class FactoryOggetto implements IFactoryOggetto {
         };
     }
 
-    private int calcolaBonus(int valoreBase, Rarita rarita, int livello) {
-        return valoreBase + (livello * rarita.getMoltiplicatore());
+    private int calcolaBonus(int valoreBase, Rarita rarita) {
+        return valoreBase * rarita.getMoltiplicatore();
     }
 
     private Rarita generaRarita(int livello) {

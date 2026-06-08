@@ -51,12 +51,12 @@ public class ServiceCombattimento implements IServiceCombattimento {
     public RisultatoBattaglia concludiBattaglia(BattleState stato) {
         Giocatore giocatore= stato.getGiocatore();
         AbstractNemico nemico= stato.getNemico();
-        if (giocatore.isVivo() && nemico.isVivo()) {return RisultatoBattaglia.fuga(stato.getLogBattaglia());}
+        if (giocatore.isVivo() && nemico.isVivo()) {return RisultatoBattaglia.fuga();}
         if (!giocatore.isVivo()) {
             stato.aggiungiLog(giocatore.getNome() + " è stato sconfitto.");
-            return RisultatoBattaglia.sconfitta(stato.getLogBattaglia());
+            return RisultatoBattaglia.sconfitta();
         }
-        int xp  = nemico.getXpRilasciata();
+        int xp = nemico.getXpRilasciata();
         int oro = nemico.getOroRilasciato();
         AbstractOggetto drop = dropOggetto(giocatore.getLivello());
         serviceLivello.aggiungiEsperienza(giocatore, xp);
@@ -64,9 +64,12 @@ public class ServiceCombattimento implements IServiceCombattimento {
         if (drop != null) {
             serviceInventario.aggiungiOggetto(giocatore, drop);
         }
+        int hpRecuperati = stato.getDanniSubiti()/2;
+        giocatore.recuperaSalute(hpRecuperati);
         stato.aggiungiLog("Vittoria! XP: +" + xp + "  Oro: +" + oro +
-                (drop != null ? "  Drop: " + drop.getNome() : ""));
-        return RisultatoBattaglia.vittoria(xp, oro, drop, stato.getLogBattaglia());
+                (drop != null ? "  Drop: " + drop.getNome() : "") +
+                (hpRecuperati > 0 ? "  HP recuperati: +" + hpRecuperati : ""));
+        return RisultatoBattaglia.vittoria(xp, oro, drop, hpRecuperati);
     }
 
     private AbstractOggetto dropOggetto(int livelloGiocatore) {

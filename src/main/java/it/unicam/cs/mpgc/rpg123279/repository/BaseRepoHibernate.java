@@ -1,6 +1,5 @@
 package it.unicam.cs.mpgc.rpg123279.repository;
 
-import it.unicam.cs.mpgc.rpg123279.config.HibernateConfig;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import java.io.Serializable;

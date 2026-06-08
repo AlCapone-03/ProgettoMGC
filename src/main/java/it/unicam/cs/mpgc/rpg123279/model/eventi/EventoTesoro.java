@@ -21,6 +21,4 @@ public class EventoTesoro extends AbstractGameEvent{
 
     public AbstractOggetto getOggetto(){ return oggetto; }
     public int getOro(){ return oro; }
-//    public boolean haOggetto(){ return oggetto != null; }
-//    public boolean haOro(){ return oro>0; }
 }

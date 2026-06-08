@@ -45,49 +45,15 @@ public abstract class AbstractOggetto {
         this.livelloRichiesto = livelloRichiesto;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getDescrizione() {
-        return descrizione;
-    }
-
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
-    }
-
-    public int getValore() {
-        return valore;
-    }
-
-    public void setValore(int valore) {
-        this.valore = valore;
-    }
-
-    public Rarita getRarita() {
-        return rarita;
-    }
-
-    public void setRarita(Rarita rarita) {
-        this.rarita = rarita;
-    }
-
-    public TipoOggetto getTipoOggetto() {
-        return tipoOggetto;
-    }
-
-    public void setTipoOggetto(TipoOggetto tipoOggetto) {
-        this.tipoOggetto = tipoOggetto;
-    }
+    public Long getId() {return id;}
+    public String getNome() {return nome;}
+    public void setNome(String nome) {this.nome = nome;}
+    public String getDescrizione() {return descrizione;}
+    public void setDescrizione(String descrizione) {this.descrizione = descrizione;}
+    public int getValore() {return valore;}
+    public Rarita getRarita() {return rarita;}
+    public void setRarita(Rarita rarita) {this.rarita = rarita;}
+    public TipoOggetto getTipoOggetto() {return tipoOggetto;}
 
     @Override
     public String toString() {
