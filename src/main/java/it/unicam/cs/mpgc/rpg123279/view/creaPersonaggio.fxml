@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="it.unicam.cs.mpgc.rpg123279.controller.ControllerCreaPersonaggio"
+      alignment="CENTER" spacing="14" prefWidth="900" prefHeight="650" style="-fx-padding: 60;">
+    <Label text="Crea il tuo personaggio" style="-fx-font-size: 22; -fx-font-weight: bold;"/>
+    <Region prefHeight="10"/>
+    <HBox spacing="10" alignment="CENTER_LEFT" maxWidth="420">
+        <Label text="Nome:" minWidth="80"/>
+        <TextField fx:id="txtNome" promptText="Inserisci il nome..." prefWidth="300"/>
+    </HBox>
+
+    <Region prefHeight="10"/>
+
+    <Label text="Scegli la tua classe:" style="-fx-font-weight: bold;"/>
+    <HBox spacing="40" alignment="CENTER">
+        <RadioButton fx:id="rbCorsaro" text="Corsaro"/>
+        <RadioButton fx:id="rbCapitano" text="Capitano"/>
+        <RadioButton fx:id="rbCacciatore" text="Cacciatore"/>
+    </HBox>
+    <Label fx:id="lblDescrizioneClasse" wrapText="true" maxWidth="500" style="-fx-font-style: italic;"/>
+    <Label fx:id="lblStatClasse" style="-fx-font-weight: bold;"/>
+    <Label fx:id="lblErrore" style="-fx-text-fill: red;" visible="false"/>
+
+    <Region prefHeight="20"/>
+
+    <HBox spacing="20" alignment="CENTER">
+        <Button text="Indietro" onAction="#onIndietro"/>
+        <Button text="Inizia l'avventura" onAction="#onConferma"/>
+    </HBox>
+</VBox>

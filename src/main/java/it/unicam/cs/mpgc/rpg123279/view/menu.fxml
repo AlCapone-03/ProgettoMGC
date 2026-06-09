@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="it.unicam.cs.mpgc.rpg123279.controller.ControllerMenu"
+      alignment="CENTER" spacing="16" prefWidth="900" prefHeight="650" style="-fx-padding: 80;">
+    <Label text="Jack Sparrow's Curse" style="-fx-font-size: 28; -fx-font-weight: bold;"/>
+    <Label text="Un'avventura nei Caraibi maledetti" style="-fx-font-size: 13; -fx-font-style: italic;"/>
+
+    <Region prefHeight="30"/>
+
+    <Button text="Nuova Partita" prefWidth="260" onAction="#onNuovaPartita"/>
+    <Button text="Carica Partita" prefWidth="260" onAction="#onCaricaPartita"/>
+    <Button text="Esci" prefWidth="260" onAction="#onEsci"/>
+    <VBox fx:id="boxSalvataggi" spacing="6" style="-fx-padding: 10 0 0 0;" maxWidth="500"/>
+</VBox>

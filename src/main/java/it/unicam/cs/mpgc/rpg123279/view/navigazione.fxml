@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns:fx="http://javafx.com/fxml" fx:controller="it.unicam.cs.mpgc.rpg123279.controller.ControllerNavigazione"
+      prefWidth="900" prefHeight="650" style="-fx-padding: 16; -fx-spacing: 16;">
+    <VBox spacing="8" prefWidth="340" minWidth="300">
+        <Label text="Personaggio" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+        <Separator/>
+        <Label fx:id="lblNome"/>
+        <Label fx:id="lblClasse"/>
+        <Label fx:id="lblLivello"/>
+        <Label fx:id="lblHp"/>
+        <Label fx:id="lblXp"/>
+        <Label fx:id="lblOro"/>
+
+        <Region prefHeight="10"/>
+
+        <Label text="Posizione attuale" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+        <Separator/>
+        <Label fx:id="lblIsola" style="-fx-font-weight: bold;"/>
+        <Label fx:id="lblDescIsola" wrapText="true" maxWidth="320" style="-fx-font-style: italic;"/>
+        <Label fx:id="lblLvlConsigliato"/>
+
+        <Region prefHeight="6"/>
+
+        <Label fx:id="lblStatoBoss" style="-fx-font-weight: bold;"/>
+        <Button text="Esplora l'isola" maxWidth="Infinity" onAction="#onEsplora"/>
+        <Button fx:id="btnSfidaBoss" text="Sfida il Boss" maxWidth="Infinity" onAction="#onSfidaBoss"/>
+
+        <Region prefHeight="10"/>
+
+        <Label text="Rotte disponibili" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+        <Separator/>
+        <VBox fx:id="boxRotte" spacing="6"/>
+
+        <Region VBox.vgrow="ALWAYS"/>
+        <Separator/>
+
+        <HBox spacing="10">
+            <Button text="Inventario" onAction="#onApriInventario"/>
+            <Button text="Salva partita" onAction="#onSalva"/>
+        </HBox>
+
+    </VBox>
+
+    <VBox spacing="6" HBox.hgrow="ALWAYS">
+        <Label text="Diario di bordo" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+        <Separator/>
+        <TextArea fx:id="txtLog" editable="false" wrapText="true" VBox.vgrow="ALWAYS" style="-fx-font-family: monospace; -fx-font-size: 12;"/>
+    </VBox>
+</HBox>
