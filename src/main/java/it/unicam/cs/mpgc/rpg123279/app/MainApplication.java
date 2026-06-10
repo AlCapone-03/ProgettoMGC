@@ -14,7 +14,7 @@ public class MainApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         HibernateConfig.getSessionFactory();
         AppConfig appConfig = new AppConfig();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/menu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/it/unicam/cs/mpgc/rpg123279/view/menu.fxml"));
         Parent root = loader.load();
         ControllerMenu menuController = loader.getController();
         menuController.setAppConfig(appConfig);

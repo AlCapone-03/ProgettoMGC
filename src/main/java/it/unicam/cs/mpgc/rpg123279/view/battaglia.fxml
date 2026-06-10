@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns:fx="http://javafx.com/fxml" fx:controller="it.unicam.cs.mpgc.rpg123279.controller.ControllerBattaglia"
+      prefWidth="900" prefHeight="650" style="-fx-padding: 16; -fx-spacing: 16;">
+
+    <VBox spacing="8" prefWidth="320" minWidth="280">
+        <Label text="Combattimento" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+        <Separator/>
+
+        <Label fx:id="lblNomeGiocatore" style="-fx-font-weight: bold;"/>
+        <Label fx:id="lblHpGiocatore"/>
+        <Region prefHeight="10"/>
+        <Label fx:id="lblNomeNemico" style="-fx-font-weight: bold;"/>
+        <Label fx:id="lblLivelloNemico"/>
+        <Label fx:id="lblHpNemico"/>
+        <Region prefHeight="20"/>
+        <Label text="Azioni" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+        <Separator/>
+
+        <Button fx:id="btnAttacca" text="Attacca" maxWidth="Infinity" onAction="#onAttacca"/>
+        <Button fx:id="btnUsaOggetto" text="Usa oggetto" maxWidth="Infinity" onAction="#onUsaOggetto"/>
+        <VBox fx:id="boxOggetti" spacing="4" style="-fx-padding: 0 0 0 12;"/>
+        <Button fx:id="btnScappa" text="Fuggi" maxWidth="Infinity" onAction="#onScappa"/>
+        <Region prefHeight="12"/>
+        <Separator/>
+
+        <Button fx:id="btnTornaNavigazione" text="Torna alla navigazione" maxWidth="Infinity" onAction="#onTornaNavigazione"
+                visible="false" managed="false" style="-fx-font-weight: bold;"/>
+    </VBox>
+
+    <VBox spacing="6" HBox.hgrow="ALWAYS">
+        <Label text="Log battaglia" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+        <Separator/>
+        <TextArea fx:id="txtLog" editable="false" wrapText="true" VBox.vgrow="ALWAYS" style="-fx-font-family: monospace; -fx-font-size: 12;"/>
+    </VBox>
+
+</HBox>

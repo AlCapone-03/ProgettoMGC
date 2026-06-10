@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns:fx="http://javafx.com/fxml" fx:controller="it.unicam.cs.mpgc.rpg123279.controller.ControllerInventario"
+      prefWidth="900" prefHeight="650" style="-fx-padding: 16; -fx-spacing: 16;">
+
+    <VBox spacing="8" prefWidth="220" minWidth="200">
+        <Label text="Personaggio" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+        <Separator/>
+        <Label fx:id="lblNome" style="-fx-font-weight: bold;"/>
+        <Label fx:id="lblClasse"/>
+        <Label fx:id="lblLivello"/>
+        <Label fx:id="lblHp"/>
+        <Label fx:id="lblAttacco"/>
+        <Label fx:id="lblDifesa"/>
+        <Label fx:id="lblOro"/>
+        <Region prefHeight="10"/>
+        <Label text="Equipaggiato" style="-fx-font-weight: bold;"/>
+        <Separator/>
+
+        <Label fx:id="lblArmaEquip" wrapText="true"/>
+        <Label fx:id="lblArmaturaEquip"  wrapText="true"/>
+        <Region VBox.vgrow="ALWAYS"/>
+        <Button text="Torna al mare" maxWidth="Infinity" onAction="#onTornaAlMare"/>
+    </VBox>
+
+    <VBox spacing="6" prefWidth="300" HBox.hgrow="SOMETIMES">
+        <Label text="Inventario" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+        <Separator/>
+        <ListView fx:id="listInventario" VBox.vgrow="ALWAYS"/>
+    </VBox>
+
+    <VBox spacing="10" prefWidth="280" minWidth="220">
+        <Label text="Dettaglio" style="-fx-font-weight: bold; -fx-font-size: 14;"/>
+        <Separator/>
+        <Label fx:id="lblDettaglio" wrapText="true" VBox.vgrow="ALWAYS"/>
+        <HBox fx:id="boxAzioni" spacing="8">
+            <Button fx:id="btnEquipaggia" text="Equipaggia" onAction="#onEquipaggia"/>
+            <Button fx:id="btnUsa" text="Usa" onAction="#onUsa"/>
+            <Button fx:id="btnScarta" text="Scarta" onAction="#onScarta"/>
+        </HBox>
+    </VBox>
+</HBox>

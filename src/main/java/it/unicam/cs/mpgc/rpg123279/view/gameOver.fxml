@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="it.unicam.cs.mpgc.rpg123279.controller.ControllerGameOver"
+      alignment="CENTER" spacing="20" prefWidth="900" prefHeight="650" style="-fx-padding: 60;">
+
+    <Label text="GAME OVER" style="-fx-font-size: 36; -fx-font-weight: bold;"/>
+    <Label text="Sei stato sconfitto. I Caraibi reclamano la tua anima." style="-fx-font-size: 13; -fx-font-style: italic;"/>
+    <Region prefHeight="30"/>
+    <Button fx:id="btnMenu" text="Torna al menu principale" prefWidth="240" onAction="#onTornaAlMenu"/>
+</VBox>

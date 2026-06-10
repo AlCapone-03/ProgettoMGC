@@ -62,13 +62,16 @@ public class ServiceCombattimento implements IServiceCombattimento {
         serviceLivello.aggiungiEsperienza(giocatore, xp);
         giocatore.aggiungiOro(oro);
         if (drop != null) {
-            serviceInventario.aggiungiOggetto(giocatore, drop);
+            try {
+                serviceInventario.aggiungiOggetto(giocatore, drop);
+            } catch (Exception e) {
+                drop = null;
+            }
         }
         int hpRecuperati = stato.getDanniSubiti()/2;
         giocatore.recuperaSalute(hpRecuperati);
-        stato.aggiungiLog("Vittoria! XP: +" + xp + "  Oro: +" + oro +
-                (drop != null ? "  Drop: " + drop.getNome() : "") +
-                (hpRecuperati > 0 ? "  HP recuperati: +" + hpRecuperati : ""));
+        stato.aggiungiLog("Vittoria! XP: +" + xp + "  Oro: +" + oro + (drop != null ?
+                "  Drop: " + drop.getNome() : "") + (hpRecuperati > 0 ? "  HP recuperati: +" + hpRecuperati : ""));
         return RisultatoBattaglia.vittoria(xp, oro, drop, hpRecuperati);
     }
 
