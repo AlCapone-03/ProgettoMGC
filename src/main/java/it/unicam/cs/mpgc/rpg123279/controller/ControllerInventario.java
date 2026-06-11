@@ -6,6 +6,7 @@ import it.unicam.cs.mpgc.rpg123279.model.oggetti.AbstractOggetto;
 import it.unicam.cs.mpgc.rpg123279.model.oggetti.IUsable;
 import it.unicam.cs.mpgc.rpg123279.model.oggetti.equipaggiamenti.Arma;
 import it.unicam.cs.mpgc.rpg123279.model.oggetti.equipaggiamenti.Armatura;
+import it.unicam.cs.mpgc.rpg123279.model.oggetti.equipaggiamenti.Reliquia;
 import it.unicam.cs.mpgc.rpg123279.model.personaggi.Giocatore;
 import it.unicam.cs.mpgc.rpg123279.service.IServiceInventario;
 import javafx.fxml.FXML;
@@ -30,6 +31,7 @@ public class ControllerInventario implements Initializable {
     @FXML private Label lblOro;
     @FXML private Label lblArmaEquip;
     @FXML private Label lblArmaturaEquip;
+    @FXML private Label lblReliquiaEquip;
     @FXML private ListView<String> listInventario;
     @FXML private Label lblDettaglio;
     @FXML private HBox boxAzioni;
@@ -66,8 +68,10 @@ public class ControllerInventario implements Initializable {
 
         Arma arma = giocatore.getArmaEquipaggiata();
         Armatura armatura = giocatore.getArmaturaEquipaggiata();
+        Reliquia reliquia = giocatore.getReliquiaEquipaggiata();
         lblArmaEquip.setText("Arma: " + (arma != null ? arma.getNome() : "—"));
         lblArmaturaEquip.setText("Armatura: " + (armatura != null ? armatura.getNome() : "—"));
+        lblReliquiaEquip.setText("Reliquia: " + (reliquia != null ? reliquia.getNome() : "—"));
         listInventario.getItems().clear();
         for (AbstractOggetto o : giocatore.getInventario()) {
             listInventario.getItems().add(o.getNome() + "  (" + o.getRarita() + ")  " + o.getTipoOggetto());
@@ -85,8 +89,12 @@ public class ControllerInventario implements Initializable {
             return;
         }
         oggettoSelezionato = giocatore.getInventario().get(indice);
-        lblDettaglio.setText(oggettoSelezionato.getNome() + "\n" + oggettoSelezionato.getDescrizione() + "\n" + "Rarita': "
-                + oggettoSelezionato.getRarita() + "\n" + "Valore: " + oggettoSelezionato.getValore() + " oro");
+        String dettaglio = oggettoSelezionato.getNome() + "\n" + oggettoSelezionato.getDescrizione() + "\n" + "Rarita': "
+                + oggettoSelezionato.getRarita() + "\n" + "Valore: " + oggettoSelezionato.getValore() + " oro";
+        if (oggettoSelezionato instanceof Reliquia r && r.getEffettoSpeciale() != null) {
+            dettaglio += "\nEffetto: " + r.getEffettoSpeciale();
+        }
+        lblDettaglio.setText(dettaglio);
         boolean isEquipaggiamento = oggettoSelezionato instanceof AbstractEquipaggiamento;
         boolean isUsable = oggettoSelezionato instanceof IUsable;
         btnEquipaggia.setVisible(isEquipaggiamento);

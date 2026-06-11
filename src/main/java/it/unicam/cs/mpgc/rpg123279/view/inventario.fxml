@@ -20,7 +20,8 @@
         <Separator/>
 
         <Label fx:id="lblArmaEquip" wrapText="true"/>
-        <Label fx:id="lblArmaturaEquip"  wrapText="true"/>
+        <Label fx:id="lblArmaturaEquip" wrapText="true"/>
+        <Label fx:id="lblReliquiaEquip" wrapText="true"/>
         <Region VBox.vgrow="ALWAYS"/>
         <Button text="Torna al mare" maxWidth="Infinity" onAction="#onTornaAlMare"/>
     </VBox>

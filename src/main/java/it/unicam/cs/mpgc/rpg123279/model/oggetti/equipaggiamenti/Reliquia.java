@@ -20,4 +20,6 @@ public class Reliquia extends AbstractEquipaggiamento {
         super(nome, descrizione, valore, rarita, TipoOggetto.RELIQUIA, livelloRichiesto, bonus);
         this.effettoSpeciale = effettoSpeciale;
     }
+
+    public String getEffettoSpeciale() { return effettoSpeciale; }
 }

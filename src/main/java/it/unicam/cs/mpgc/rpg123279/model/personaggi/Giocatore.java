@@ -5,6 +5,7 @@ import it.unicam.cs.mpgc.rpg123279.model.oggetti.AbstractEquipaggiamento;
 import it.unicam.cs.mpgc.rpg123279.model.oggetti.AbstractOggetto;
 import it.unicam.cs.mpgc.rpg123279.model.oggetti.equipaggiamenti.Arma;
 import it.unicam.cs.mpgc.rpg123279.model.oggetti.equipaggiamenti.Armatura;
+import it.unicam.cs.mpgc.rpg123279.model.oggetti.equipaggiamenti.Reliquia;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +77,18 @@ public class Giocatore extends AbstractPersonaggio {
     public Armatura getArmaturaEquipaggiata() {
         return equipaggiamenti.stream().filter(e -> e instanceof Armatura)
                 .map(e -> (Armatura) e).findFirst().orElse(null);
+    }
+
+    public Reliquia getReliquiaEquipaggiata() {
+        return equipaggiamenti.stream().filter(e -> e instanceof Reliquia)
+                .map(e -> (Reliquia) e).findFirst().orElse(null);
+    }
+
+    @Override
+    public int getMaxHp() {
+        Reliquia reliquia = getReliquiaEquipaggiata();
+        int bonusReliquia = reliquia != null ? reliquia.getBonusStatistica() : 0;
+        return super.getMaxHp() + bonusReliquia;
     }
 
     @Override
